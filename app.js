@@ -25,9 +25,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes, require('cors')());
-app.use('/api/user', users);
-app.use('/api/driver', drivers);
-app.use('/api/client', clients);
+app.use('/api/user', users, require('cors')());
+app.use('/api/driver', drivers, require('cors')());
+app.use('/api/client', clients, require('cors')());
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
