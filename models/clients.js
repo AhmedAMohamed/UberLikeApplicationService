@@ -20,16 +20,29 @@ var Location = {
     lng: Number
 };
 
-var clientsSchema = mongoose.schema({
-    presonalData: userData,
+var clientsSchema = mongoose.Schema({
+    presonalData: {
+        name: String,
+        email: String,
+        password: String
+    },
 
     rides:[{
-        from: Location,
-        to: Location
+        from: {
+            lat: Number,
+            lng: Number
+        },
+        to: {
+            lat: Number,
+            lng: Number
+        }
     }],
 
     currentPth: [{
-        location: Location,
+        location: {
+            lat: Number,
+            lng: Number
+        },
         time: Number
     }],
 
