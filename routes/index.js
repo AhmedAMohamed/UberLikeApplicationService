@@ -1,9 +1,11 @@
+/**
+ * Created by AhmedA on 4/11/2016.
+ */
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
 router.get('/', function(req, res, next) {
-    res.send('Not a valid action');
+    res.send('Clent api');
 });
 
 module.exports = router;

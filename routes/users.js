@@ -1,10 +1,11 @@
+/**
+ * Created by AhmedA on 4/11/2016.
+ */
 var express = require('express');
 var router = express.Router();
 
-
-/* GET users listing. */
 router.get('/', function(req, res, next) {
-    res.send("All users api");
+    res.send('Clent api');
 });
 
 module.exports = router;
