@@ -1,6 +1,5 @@
 # UberLikeApplicationService
 Node JS Restful APIs for Uber like application services <br>
-<br>
 ##Dependencies
 ###Express
  npm install --save express <br>

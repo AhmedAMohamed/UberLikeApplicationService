@@ -5,7 +5,12 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/', function(req, res, next) {
-    res.send('Clent api');
+    res.send('Client api');
 });
+
+router.get('/ahmed', function(req, res, next){
+    console.log("Here");
+});
+
 
 module.exports = router;

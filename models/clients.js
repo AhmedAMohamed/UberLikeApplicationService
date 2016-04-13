@@ -3,41 +3,15 @@
  */
 
 var mongoose = require('mongoose');
+var UserSchema = require('./users');
 
 var HashPassWord = function(password) {
     var md5 = require('MD5');
     return md5(password);
 };
 
-var userData = {
-    name: String,
-    email: String,
-    password: HashPassWord(word)
-};
-
-var Location = {
-    lat: Number,
-    lng: Number
-};
-
 var clientsSchema = mongoose.Schema({
-    presonalData: {
-        name: String,
-        email: String,
-        password: String
-    },
-
-    rides:[{
-        from: {
-            lat: Number,
-            lng: Number
-        },
-        to: {
-            lat: Number,
-            lng: Number
-        }
-    }],
-
+    personalData: UserSchema,
     currentPth: [{
         location: {
             lat: Number,
