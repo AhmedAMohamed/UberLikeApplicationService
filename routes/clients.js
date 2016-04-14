@@ -5,7 +5,7 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/ahmed', function(req, res, next) {
-    res.send('Client api');
+
 });
 
 module.exports = router;

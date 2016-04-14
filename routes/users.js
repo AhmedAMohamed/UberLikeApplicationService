@@ -4,12 +4,12 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/', function(req, res, next) {
+router.get('/login', function(req, res, next) {
     res.send('Client api');
 });
 
-router.get('/ahmed', function(req, res, next){
-    console.log("Here");
+router.get('/signup', function(req, res, next){
+
 });
 
 
