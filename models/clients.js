@@ -3,15 +3,12 @@
  */
 
 var mongoose = require('mongoose');
-var UserSchema = require('./users');
+var UserSchema = require('./user');
 
-var HashPassWord = function(password) {
-    var md5 = require('MD5');
-    return md5(password);
-};
+
 
 var clientsSchema = mongoose.Schema({
-    personalData: UserSchema,
+    personalData: String,
     currentPth: [{
         location: {
             lat: Number,
