@@ -13,7 +13,7 @@ var user = require('./models/user');
 var Location = require('./models/Location')
 var app = express();
 
-var connected = false;
+var connected = true;
 var url = 'mongodb://localhost/uber2';
 db = mongoose.connect(url, function(error) {
     if(error){

@@ -12,8 +12,14 @@ var UserSchema = mongoose.Schema({
     type: String,
 
     rides:[{
-        from: String ,
-        to: String
+        from: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Location'
+        },
+        to: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Location'
+        }
     }],
 
     updatedID: String,

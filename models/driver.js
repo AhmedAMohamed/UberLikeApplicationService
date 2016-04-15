@@ -6,9 +6,15 @@ var UserSchema = require('./user');
 var Location = require('./Location');
 
 var driversSchema = mongoose.Schema({
-    personalData: String,
+    personalData: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
     currentPth: [{
-        location: String,
+        location: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Location'
+        },
         time: Number
     }],
     car: {
