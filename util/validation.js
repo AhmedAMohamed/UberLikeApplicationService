@@ -4,9 +4,9 @@
 var User = require('./models/user');
 
 var userChecker = function($id) {
-    User.find({ _id: $id }, function(err, users){
+    User.findById($id, function(err, user){
         if(err)
             return 0;
-        users.map();
+        return user;
     });
 };
