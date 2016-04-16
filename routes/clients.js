@@ -3,7 +3,7 @@
  */
 var express = require('express');
 var router = express.Router();
-var Location = require('../models/Location');
+//var Location = require('../models/Location');
 var counter = 0;
 router.get('/', function(req, res) {
     var location = new Location({
