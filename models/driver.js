@@ -22,9 +22,7 @@ var driversSchema = mongoose.Schema({
         carNumber: String,
         model: String
     },
-    avatar: String,
-    updatedID: String,
-    approved: Boolean
+    avatar: String
 });
 
 var driver = mongoose.model('Driver', driversSchema);

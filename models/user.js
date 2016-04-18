@@ -5,9 +5,9 @@ var mongoose = require('mongoose');
 var Location = require('./Location');
 
 var UserSchema = mongoose.Schema({
-    name: String,
-    email: String,
-    password: String,
+    name: {type: String, unique: false, trim: true},
+    email: {type: String, unique: true, trim: true},
+    password: {type: String, unique: false},
     mobile: String,
     type: String,
 
@@ -20,10 +20,7 @@ var UserSchema = mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Location'
         }
-    }],
-
-    updatedID: String,
-    approved: Boolean
+    }]
 });
 
 var users = mongoose.model('User', UserSchema);

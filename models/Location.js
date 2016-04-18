@@ -5,11 +5,14 @@
 var mongoose = require('mongoose');
 
 var LocationSchema = mongoose.Schema({
-    lat: Number,
-    lng: Number,
-
-    updatedID: String,
-    approved: Boolean
+    location: {
+        type:
+        {
+            lat: Number,
+            lng: Number
+        },
+        unique: true
+    }
 });
 
 var location = mongoose.model('Location', LocationSchema);
