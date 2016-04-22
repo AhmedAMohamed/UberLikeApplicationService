@@ -6,8 +6,25 @@ var User = require('../models/user');
 
 var router = express.Router();
 
-router.get('/login', function(req, res, next) {
+router.post('/login', function(req, res, next) {
 
+    console.log("Ahmed Alaa");
+    User.find({email: req.header('email'), password: req.header('password')}, function (err, users) {
+        if(err) {
+            res.json({valid: false, message: "Not found"});
+            res.end();
+        }
+        else {
+            if(users.length == 1) {
+                res.json({user_id: users[0]._id, valid: true, message: ""});
+                res.end();
+            }
+            else {
+                res.json({valid: false, message: "Not found"});
+                res.end();
+            }
+        }
+    });
 });
 
 router.post('/signup', function(req, res){
