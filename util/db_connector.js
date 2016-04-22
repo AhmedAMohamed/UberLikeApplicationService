@@ -25,5 +25,4 @@ var connector = function(url) {
         }
     });
 }
-
 module.exports = connector;

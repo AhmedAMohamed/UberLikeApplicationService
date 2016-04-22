@@ -28,7 +28,6 @@ router.post('/login', function(req, res, next) {
 });
 
 router.post('/signup', function(req, res){
-
     console.log(req.header("fullName"));
     var data = {
         name: req.header('fullName'),
@@ -37,7 +36,7 @@ router.post('/signup', function(req, res){
         mobile: req.header('mobile'),
         type: 'type'
     };
-    var user = User(data);
+    var user = new User(data);
     user.save(function(err, a) {
         if(err) {
             res.json({

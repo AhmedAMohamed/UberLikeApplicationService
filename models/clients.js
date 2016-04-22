@@ -18,10 +18,7 @@ var clientsSchema = mongoose.Schema({
             ref: 'Location'
         },
         time: Number
-    }],
-
-    updatedID: String,
-    approved: Boolean
+    }]
 });
 
 var client = mongoose.model('Client', clientsSchema);
