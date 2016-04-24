@@ -31,6 +31,20 @@ router.post('/login', function(req, res, next) {
             }
         });
     }
+    User.find({email: req.header('email'),
+               password: req.header('password')}, function(err, auth){
+        if(err) res.json({
+            valid:false,
+            message: "Not Found"
+            });
+        else {
+            res.json({
+                user_id: auth[0]._id,
+                valid: true,
+                message: ""
+            });
+        }
+    })
 });
 
 router.post('/signup', function(req, res){
