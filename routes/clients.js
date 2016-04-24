@@ -5,21 +5,33 @@ var express = require('express');
 var validator = require('../util/validation');
 var router = express.Router();
 var User = require('../models/user');
-var Location = require('../models/Location');
-var counter = 0;
+var Driver = require('../models/driver');
+
 router.get('/', function(req, res) {
-    var location = new Location({
-        lat: counter,
-        lng: counter,
-        updatedID: "",
-        approved: false
-    });
-    counter++;
-    location.save();
-    res.send("Ahmed");
+    res.json({message: "Not valid access", valid: false});
+    res.end();
 });
 
-var val = validator[1];
+router.get('/getNearDrivers', function(req, res) {
+    var user_id = req.header('user_id');
+    var location = {
+        lat: req.header('lat'),
+        lng: req.header('lng')
+    };
+    var r = req.header('r');
+    User.findById(user_id, function (err, user) {
+        if(err) {
+            res.json({valid: false, message: "Not a valid user"});
+            res.end();
+        }
+        else {
+            Driver.find().$where('this.location.lat < user.location.lat + '+r).exec(function(err, drivers){
+                res.json(drivers);
+            });
+        }
+    });
+});
+
 router.get('/user', function(req, res){
     res.json({Ahmed: "Alaa"});
 });

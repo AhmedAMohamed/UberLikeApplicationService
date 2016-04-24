@@ -4,18 +4,20 @@
 
 var mongoose = require('mongoose');
 var UserSchema = require('./user');
-var loactionSchema = require('./Location');
-
 
 var clientsSchema = mongoose.Schema({
     personalData: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
-    currentPth: [{
+    currentLocation: { // last updated location
+        lat: Number,
+        lng: Number
+    },
+    currentPath: [{
         location:{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Location'
+            lat: Number,
+            lng: Number
         },
         time: Number
     }]

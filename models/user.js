@@ -10,15 +10,20 @@ var UserSchema = mongoose.Schema({
     password: {type: String, unique: false},
     mobile: String,
     type: String,
+    reg_id: String,
 
     rides:[{
         from: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Location'
+            location: {
+                lat: Number,
+                lng: Number
+            }
         },
         to: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Location'
+            location: {
+                lat: Number,
+                lng: Number
+            }
         }
     }]
 });
