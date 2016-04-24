@@ -9,7 +9,6 @@ var connector = function(url) {
     var client = require('../models/clients');
     var driver = require('../models/driver');
     var user = require('../models/user');
-    var Location = require('../models/Location');
 
     var connected = true;
 

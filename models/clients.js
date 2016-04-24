@@ -11,13 +11,13 @@ var clientsSchema = mongoose.Schema({
         ref: 'User'
     },
     currentLocation: { // last updated location
-        lat: Number,
-        lng: Number
+        type: [Number],
+        index: '2d'
     },
     currentPath: [{
         location:{
-            lat: Number,
-            lng: Number
+            type: [Number],
+            index: '2d'
         },
         time: Number
     }]

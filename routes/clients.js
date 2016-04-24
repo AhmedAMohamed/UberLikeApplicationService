@@ -13,22 +13,33 @@ router.get('/', function(req, res) {
 });
 
 router.get('/getNearDrivers', function(req, res) {
-    var user_id = req.header('user_id');
-    var location = {
-        lat: req.header('lat'),
-        lng: req.header('lng')
-    };
+    var client_id = req.header('client_id');
+    var location = [
+        req.header('lng'),
+        req.header('lat')
+    ];
     var r = req.header('r');
-    User.findById(user_id, function (err, user) {
+    User.findById(client_id, function (err, user) {
         if(err) {
             res.json({valid: false, message: "Not a valid user"});
             res.end();
         }
         else {
-            Driver.find().$where('this.location.lat < user.location.lat + '+r).exec(function(err, drivers){
-                res.json(drivers);
+            Driver.find({location: { $geowithin:{$centerSphere: [
+                [req.header('lng'),
+                req.header('lat')],
+                r/3963.2
+            ]}}
+            }, function(err,drivers){
+               if(err){
+                   res.json({msg: "hi :("});
+               }
+                else{
+                   res.json(drivers);
+               }
             });
         }
+
     });
 });
 

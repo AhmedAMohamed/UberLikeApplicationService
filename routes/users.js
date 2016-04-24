@@ -4,6 +4,7 @@
 var express = require('express');
 var User = require('../models/user');
 var Driver = require('../models/driver');
+var Client = require('../models/clients');
 
 var router = express.Router();
 
@@ -54,24 +55,82 @@ router.post('/signup', function(req, res){
         email: req.header('email'),
         password: req.header('password'),
         mobile: req.header('mobile'),
-        type: 'type'
+        reg_id: req.header('reg_id'),
+        type: req.header('type')
     };
     var user = new User(data);
+
     user.save(function(err, a) {
         if(err) {
             res.json({
                 valid: false,
-                message: "Error"
+                message: "wrong data"
             });
         }
         else {
-            res.json({
-                user_id: a._id,
-                valid: true,
-                message: ""
-            });
+
+
+            if(req.header ("type") == 'client'){
+                var data_client ={
+                    personalData: a._id,
+                    currentLocation: [
+                         req.header("lat"),
+                         req.header("lng")
+                    ]
+                };
+                var client = new Client(data_client);
+                client.save(function(err, c){
+                    if(err){
+                        res.json({
+                            valid: false,
+                            message: "error in client registration"
+                        });
+                    }
+                    else{
+                        res.json({
+                            user_id: c._id,
+                            valid: true,
+                            message: ""
+                        });
+                    }
+                });
+            }
+            else if (req.header ("type") == 'driver'){
+                var data_driver ={
+                    personalData: a._id,
+                    currentLocation: [
+                        req.header("lat"),
+                        req.header("lng")
+                    ],
+                    car:{
+                        color: req.header("color"),
+                        carNumber: req.header("carNumber"),
+                        model: req.header("model")
+                    },
+                    avatar: req.header("avatar")
+                };
+                var driver = new Driver(data_driver);
+                driver.save(function(err, d){
+                    if(err){
+                        res.json({
+                            valid: false,
+                            message: "error in driver registration"
+                        });
+                    }
+                    else{
+                        res.json({
+                            user_id: d._id,
+                            valid: true,
+                            message: ""
+                        });
+                    }
+                });
+            }
         }
     });
+
+
+
 });
 
 

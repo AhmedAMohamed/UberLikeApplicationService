@@ -2,7 +2,7 @@
  * Created by AhmedA on 4/13/2016.
  */
 var mongoose = require('mongoose');
-var Location = require('./Location');
+
 
 var UserSchema = mongoose.Schema({
     name: {type: String, unique: false, trim: true},
@@ -15,14 +15,14 @@ var UserSchema = mongoose.Schema({
     rides:[{
         from: {
             location: {
-                lat: Number,
-                lng: Number
+                type: [Number],
+                index: '2d'
             }
         },
         to: {
             location: {
-                lat: Number,
-                lng: Number
+                type: [Number],
+                index: '2d'
             }
         }
     }]
