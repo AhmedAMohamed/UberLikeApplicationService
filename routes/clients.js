@@ -19,20 +19,21 @@ router.get('/getNearDrivers', function(req, res) {
         req.header('lat')
     ];
     var r = req.header('r');
+
     User.findById(client_id, function (err, user) {
         if(err) {
             res.json({valid: false, message: "Not a valid user"});
             res.end();
         }
         else {
-            Driver.find({location: { $geowithin:{$centerSphere: [
-                [req.header('lng'),
-                req.header('lat')],
-                r/3963.2
+            Driver.find({currentLocation: { $geoWithin:{$centerSphere: [
+                [Number(location[0]),
+                Number(location[1])],
+                Number(r)
             ]}}
             }, function(err,drivers){
                if(err){
-                   res.json({msg: "hi :("});
+                   res.json({msg: err});
                }
                 else{
                    res.json(drivers);
@@ -43,7 +44,9 @@ router.get('/getNearDrivers', function(req, res) {
     });
 });
 
-router.get('/user', function(req, res){
-    res.json({Ahmed: "Alaa"});
+router.get('/getDrivers', function(req, res){
+    Driver.find({}, function (err, drivers) {
+        res.json(drivers);
+    })
 });
 module.exports = router;
