@@ -10,7 +10,7 @@ var clients = require('./routes/clients');
 var app = express();
 var db = require('./util/db_connector');
 
-db('mongodb://localhost/uber2', function(connected){
+db('mongodb://AhmedAMohamed:Gehad123!@ds021761.mlab.com:21761/uberapp', function(connected){
     if(connected) {
         console.log("Ahmed Rocks");
         // uncomment after placing your favicon in /public
@@ -33,7 +33,7 @@ db('mongodb://localhost/uber2', function(connected){
 });
 
 // error handlers
-
+/*
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
@@ -45,12 +45,12 @@ if (app.get('env') === 'development') {
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function(err, req, res) {
+app.use('',function(err, req, res) {
   res.status(err.status || 500);
   res.render('error', {
     message: err.message,
     error: {}
   });
 });
-
+*/
 module.exports = app;
