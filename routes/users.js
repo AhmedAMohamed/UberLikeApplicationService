@@ -9,43 +9,76 @@ var Client = require('../models/clients');
 var router = express.Router();
 
 router.post('/login', function(req, res, next) {
-
-    var type = req.header("type");
-    if(type == "driver") {
-        User.find({email: req.header('email'), password: req.header('password')}, function (err, users) {
-            if(err) {
-                res.json({valid: false, message: "Not found"});
-                res.end();
-            }
-            else {
-                if(users.length == 1) {
-                    Driver.find({personalData: users[0]._id}, function (err, drivers) {
-                        if(drivers.length == 1) {
-
+    var userType = req.header('type');
+    var pass = req.header('password');
+    var mail = req.header('email');
+    var mob = req.header('mobile');
+    res.json({ahmed: "hhhhhhhhhhhhhhhh"});
+    res.end();
+    User.find({
+        email: mail,
+        password: pass,
+        mobile: mob,
+        type: userType
+    }, function(err, users){
+        if(err) {
+            res.json({valid: false, message: "Not a valid access"});
+        }
+        else {
+            if(users.length == 1) {
+                if(userType = "client") {
+                    Client.find({personalData: users[0]._id}, function(err, clinets) {
+                        if(err) {
+                            res.json({valid: false, message: "Not a valid client access"});
+                        }
+                        if(clinets.length == 1) {
+                            res.json(
+                                {
+                                    client_id: clients[0]._id,
+                                    valid: true,
+                                    message: ""
+                                }
+                            );
+                        }
+                        else {
+                            res.json(
+                                {
+                                    valid: false,
+                                    message: "server error"
+                                });
+                        }
+                    });
+                }
+                else if(userType == "driver") {
+                    Driver.find({presonalData: users[0]._id}, function(err, drivers){
+                        if(err) {
+                            res.json({valid: false, message: "Wrong access"});
+                        }
+                        if(drivers.length == 1){
+                            res.json(
+                                {
+                                    driver_id: drivers[0]._id,
+                                    valid: true,
+                                    message: ""
+                                }
+                            );
+                        }
+                        else {
+                            res.json(
+                                {
+                                    valid: false,
+                                    message: "Server error"
+                                }
+                            );
                         }
                     });
                 }
                 else {
-                    res.json({valid: false, message: "Not found"});
-                    res.end();
+                    res.json({valid: false, message: "Wrong user type token"});
                 }
             }
-        });
-    }
-    User.find({email: req.header('email'),
-               password: req.header('password')}, function(err, auth){
-        if(err) res.json({
-            valid:false,
-            message: "Not Found"
-            });
-        else {
-            res.json({
-                user_id: auth[0]._id,
-                valid: true,
-                message: ""
-            });
         }
-    })
+    });
 });
 
 router.post('/signup', function(req, res){
@@ -68,8 +101,6 @@ router.post('/signup', function(req, res){
             });
         }
         else {
-
-
             if(req.header ("type") == 'client'){
                 var data_client ={
                     personalData: a._id,
