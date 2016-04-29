@@ -13,8 +13,6 @@ router.post('/login', function(req, res, next) {
     var pass = req.header('password');
     var mail = req.header('email');
     var mob = req.header('mobile');
-    res.json({ahmed: "hhhhhhhhhhhhhhhh"});
-    res.end();
     User.find({
         email: mail,
         password: pass,
@@ -76,6 +74,9 @@ router.post('/login', function(req, res, next) {
                 else {
                     res.json({valid: false, message: "Wrong user type token"});
                 }
+            }
+            else {
+                res.json({valid: false, message: "Not even a user"});
             }
         }
     });
