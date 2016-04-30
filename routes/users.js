@@ -238,34 +238,4 @@ router.put('/updateUserLocation', function(req, res){
     }
 });
 
-router.put('/updateUserLocation', function(req, res){
-    var userType = req.header("type");
-    if(userType == "driver") {
-        var driverID = req.header("driver_id");
-        Driver.findOne({_id: driverID}, function (err, driver) {
-            driver.currentLocation = [
-                req.header("lat"),
-                req.header("lng")
-            ];
-            driver.save(function (err, d) {
-                res.json({
-                   valid: true,
-                    driverId: err,
-                    d: d,
-                    message: ""
-                });
-            });
-        })
-    }
-    else if(userType == "client") {
-
-    }
-    else {
-        res.json({
-            valid: false,
-            message: "wrong access"
-        });
-    }
-});
-
 module.exports = router;
