@@ -24,7 +24,7 @@ router.post('/login', function(req, res, next) {
         }
         else {
             if(users.length == 1) {
-                if(userType = "client") {
+                if(userType == "client") {
                     Client.find({personalData: users[0]._id}, function(err, clinets) {
                         if(err) {
                             res.json({valid: false, message: "Not a valid client access"});
@@ -41,16 +41,17 @@ router.post('/login', function(req, res, next) {
                         else {
                             res.json(
                                 {
+                                    clients: clinets,
                                     valid: false,
                                     message: "server error"
                                 });
                         }
                     });
                 }
-                else if(userType == "driver") {
-                    Driver.find({presonalData: users[0]._id}, function(err, drivers){
+                else if(userType == "driver" ) {
+                    Driver.find({personalData: users[0]._id}, function(err, drivers){
                         if(err) {
-                            res.json({valid: false, message: "Wrong access"});
+                            res.json({valid: false, message: err});
                         }
                         if(drivers.length == 1){
                             res.json(
@@ -64,11 +65,14 @@ router.post('/login', function(req, res, next) {
                         else {
                             res.json(
                                 {
+                                    ussers: users,
+                                    drivers: drivers,
                                     valid: false,
-                                    message: "Server error"
+                                    message: "Server error driver"
                                 }
                             );
                         }
+
                     });
                 }
                 else {
@@ -160,10 +164,78 @@ router.post('/signup', function(req, res){
             }
         }
     });
-
-
-
 });
 
+router.put('/updateUserLocation', function(req, res){
+    var userType = req.header("type");
+    if(userType == "driver") {
+        var driverID = req.header("driver_id");
+        Driver.findOne({_id: driverID}, function (err, driver) {
+            if(err) {
+                res.json({
+                    valid: false,
+                    message: "Not found"
+                });
+            }
+            else {
+                driver.currentLocation = [
+                    req.header("lat"),
+                    req.header("lng")
+                ];
+                driver.save(function (err, d) {
+                    if(err) {
+                        res.json({
+                            valid: false,
+                            message: "not valid location"
+                        });
+                    }
+                    res.json({
+                        valid: true,
+                        driverId: d._id,
+                        message: ""
+                    });
+                });
+            }
+        });
+    }
+    else if(userType == "client") {
+        var clientID = req.header('client_id');
+        Client.findOne({_id: clientID}, function (err, client) {
+            if(err) {
+                res.json({
+                    valid: false,
+                    message: "Not valid access"
+                });
+            }
+            else {
+                client.currentLocation = [
+                    req.header('lat'),
+                    req.header('lng')
+                ];
+                client.save(function (err, c) {
+                    if(err) {
+                        res.json({
+                            valid: false,
+                            message: "Can not update the location"
+                        });
+                    }
+                    else {
+                        res.json({
+                            valid: true,
+                            client_id: c._id,
+                            message: ""
+                        });
+                    }
+                });
+            }
+        });
+    }
+    else {
+        res.json({
+            valid: false,
+            message: "wrong access"
+        });
+    }
+});
 
 module.exports = router;
