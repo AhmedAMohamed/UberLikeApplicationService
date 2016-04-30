@@ -24,7 +24,7 @@ router.post('/login', function(req, res, next) {
         }
         else {
             if(users.length == 1) {
-                if(userType = "client") {
+                if(userType == "client") {
                     Client.find({personalData: users[0]._id}, function(err, clinets) {
                         if(err) {
                             res.json({valid: false, message: "Not a valid client access"});
@@ -41,16 +41,17 @@ router.post('/login', function(req, res, next) {
                         else {
                             res.json(
                                 {
+                                    clients: clinets,
                                     valid: false,
                                     message: "server error"
                                 });
                         }
                     });
                 }
-                else if(userType == "driver") {
-                    Driver.find({presonalData: users[0]._id}, function(err, drivers){
+                else if(userType == "driver" ) {
+                    Driver.find({personalData: users[0]._id}, function(err, drivers){
                         if(err) {
-                            res.json({valid: false, message: "Wrong access"});
+                            res.json({valid: false, message: err});
                         }
                         if(drivers.length == 1){
                             res.json(
@@ -64,11 +65,14 @@ router.post('/login', function(req, res, next) {
                         else {
                             res.json(
                                 {
+                                    ussers: users,
+                                    drivers: drivers,
                                     valid: false,
-                                    message: "Server error"
+                                    message: "Server error driver"
                                 }
                             );
                         }
+
                     });
                 }
                 else {
@@ -160,10 +164,5 @@ router.post('/signup', function(req, res){
             }
         }
     });
-
-
-
 });
-
-
 module.exports = router;
