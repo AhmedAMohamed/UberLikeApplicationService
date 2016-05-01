@@ -31,7 +31,7 @@ router.get('/getNearDrivers', function(req, res) {
                 Number(location[1])],
                 Number(r)
             ]}},
-                available: true
+                status: "available"
             }, function(err,drivers){
                if(err){
                    res.json({msg: err});
