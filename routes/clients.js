@@ -30,7 +30,8 @@ router.get('/getNearDrivers', function(req, res) {
                 [Number(location[0]),
                 Number(location[1])],
                 Number(r)
-            ]}}
+            ]}},
+                available: true
             }, function(err,drivers){
                if(err){
                    res.json({msg: err});
@@ -50,5 +51,7 @@ router.get('/getDrivers', function(req, res){
     })
 });
 
-router.get();
+router.post('/requestRide', function (req, res) {
+
+});
 module.exports = router;
