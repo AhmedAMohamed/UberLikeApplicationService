@@ -40,7 +40,7 @@ router.get('/getNearDrivers', function(req, res) {
                             ],
                         Number(r)
                         ]}},
-                status: ""
+                status: "available"
             }, function(err,drivers){
                if(err){
                    res.json({msg: err});
@@ -50,6 +50,7 @@ router.get('/getNearDrivers', function(req, res) {
                }
             });
         }
+
     });
 });
 
