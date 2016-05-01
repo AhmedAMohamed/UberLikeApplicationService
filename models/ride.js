@@ -20,6 +20,8 @@ var rideSchema = new mongoose.Schema({
 
     endTime: Number,
 
+    status: String,
+
     locations: [
         {
             location:{
