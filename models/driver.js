@@ -9,6 +9,9 @@ var driversSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
+    available: {
+        type: Boolean, default: true
+    },
     currentLocation: {
         type: [Number],
         index: '2d'

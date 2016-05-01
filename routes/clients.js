@@ -49,4 +49,6 @@ router.get('/getDrivers', function(req, res){
         res.json(drivers);
     })
 });
+
+router.get();
 module.exports = router;

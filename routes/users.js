@@ -4,7 +4,7 @@
 var express = require('express');
 var User = require('../models/user');
 var Driver = require('../models/driver');
-var Client = require('../models/clients');
+var Client = require('../models/client');
 
 var router = express.Router();
 

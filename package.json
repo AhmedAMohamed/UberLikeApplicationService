@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www.js"
+    "start": "node ./bin/www"
   },
-  "main": "./bin/www.js",
+  "main": "./bin/www",
   "dependencies": {
     "cors": "^2.7.1",
     "debug": "~2.2.0",

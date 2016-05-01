@@ -6,20 +6,17 @@ var connector = function(url, callback) {
     console.log(url);
 
     var mongoose = require('mongoose');
-    var client = require('../models/clients');
+    var client = require('../models/client');
     var driver = require('../models/driver');
     var user = require('../models/user');
-
-    var connected = true;
+    var ride = require('../models/ride');
 
     mongoose.connect(url, function(error) {
         if(error){
-            connected = false;
             console.log("Error");
             callback(false);
         }
         else {
-            connected = true;
             callback(true);
             console.log("DB connected");
             console.log(mongoose.modelNames());
