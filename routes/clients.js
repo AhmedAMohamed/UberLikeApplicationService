@@ -56,7 +56,10 @@ router.get('/getNearDrivers', function(req, res) {
 
 router.get('/getDrivers', function(req, res){
     Driver.find({}, function (err, drivers) {
-        res.json(drivers);
+        res.json({
+            d: drivers,
+            Ahmed: "Alla"
+        });
     });
 
 });
