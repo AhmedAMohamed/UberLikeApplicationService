@@ -9,20 +9,17 @@ var driversSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
-    available: {
-        type: Boolean, default: true
+    status: {
+        type: String, default: "available"
     },
     currentLocation: {
         type: [Number],
         index: '2d'
     },
-    currentPath: [{
-        location: {
-            type: [Number],
-            index: '2d'
-        },
-        time: Number
-    }],
+    currentRide: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Ride'
+    },
     car: {
         color: String,
         carNumber: String,
