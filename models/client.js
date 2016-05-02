@@ -13,14 +13,7 @@ var clientsSchema = mongoose.Schema({
     currentLocation: { // last updated location
         type: [Number],
         index: '2d'
-    },
-    currentPath: [{
-        location:{
-            type: [Number],
-            index: '2d'
-        },
-        time: Number
-    }]
+    }
 });
 
 var client = mongoose.model('Client', clientsSchema);
