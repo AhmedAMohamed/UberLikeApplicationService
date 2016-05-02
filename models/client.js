@@ -13,7 +13,7 @@ var clientsSchema = mongoose.Schema({
     currentLocation: { // last updated location
         type: [Number],
         index: '2d'
-    },
+    }
     
 });
 

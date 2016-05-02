@@ -238,7 +238,7 @@ router.put('/updateUserLocation', function(req, res){
                                     )
 
                                 }
-                            )
+                            );
                         }
                         else if (d.status == "busy"){
                             // use GCM client on ride
