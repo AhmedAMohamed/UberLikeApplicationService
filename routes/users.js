@@ -130,11 +130,11 @@ router.post('/signup', function(req, res){
                                 uri: 'https://android.googleapis.com/gcm/send',
                                 headers: {
                                     'Content-Type': 'application/json',
-                                    'Authorization':'key=AIzaSyCYUwtrhtXlGPuXKrgwBpOYPXkdmEaqR8Y'
+                                    'Authorization':'key=AIzaSyBr6_kLRRLByjUJPE1kH83fmGhN5uA0KjY'
                                 },
                                 body: JSON.stringify({
                                     "registration_ids" : [a.reg_id],
-                                    "notification" : {
+                                    "data" : {
                                         "title": "Ahmed Alaa"
                                     },
                                     "time_to_live": 108
