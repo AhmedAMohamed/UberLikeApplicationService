@@ -126,14 +126,6 @@ router.post('/signup', function(req, res){
                     }
                     else {
 
-
-                        res.json({
-                            user_id: c._id,
-                            valid: true,
-                            message: "",
-                            re: "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                        });
-
                         var gcmObject = new gcm.AndroidGcm('AIzaSyBr6_kLRRLByjUJPE1kH83fmGhN5uA0KjY');
                         var message = new gcm.Message({
                             registration_ids: ['cgiA6RcWJKo:APA91bFToaHL35sgQrtC3j0NkOhfJmhyAWede5xOOHBC6uVsvJXt1m6FGGAhCyMGMnC3MZjiaBHVoJPm9oyX8HjxrdYoiCtRAwH3kNCvPERfTAArTyS3RNIrxAaDPGAIXS2QpgJq4ef-', "fkN9pY2uApk:APA91bEHlt6Ft8z58bq1OXAzqzapPFtn1eX9xqiJfxNaKZ_cOLSIyaK_YIfI6xzSENZSmULn6WTgdJ0ysVfVQKB33xDg4MM0bLF_jwMlUrQSVW2oGS4HXhU-4q_fQ3ioMlTG6Xq7HrJn"],
@@ -144,6 +136,13 @@ router.post('/signup', function(req, res){
                         });
 
                         gcmObject.send(message, function(err, response) {});
+
+                        res.json({
+                            user_id: c._id,
+                            valid: true,
+                            message: "",
+                            re: "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                        });
                     }
                     /*
                         var message = gcm.Message();
