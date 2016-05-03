@@ -136,13 +136,13 @@ router.post('/signup', function(req, res){
 
                         sender.send(message, regTokens, function (err, response) {
                             if(err) {
-                                res.json(err);
+                                res.json({aaaaaaaa: a.reg_id});
                             } else {
                                 res.json({
                                     user_id: c._id,
                                     valid: true,
                                     message: "",
-                                    re: response
+                                    re: "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                                 });
                             }
                         });
