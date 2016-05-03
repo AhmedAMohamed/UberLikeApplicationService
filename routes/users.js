@@ -2,6 +2,8 @@
  * Created by AhmedA on 4/11/2016.
  */
 var express = require('express');
+var gcm = require('node-gcm-service');
+
 var User = require('../models/user');
 var Driver = require('../models/driver');
 var Client = require('../models/client');
@@ -87,7 +89,7 @@ router.post('/login', function(req, res, next) {
 });
 
 router.post('/signup', function(req, res){
-    console.log(req.header("fullName"));
+
     var data = {
         name: req.header('fullName'),
         email: req.header('email'),
@@ -123,10 +125,26 @@ router.post('/signup', function(req, res){
                         });
                     }
                     else{
-                        res.json({
-                            user_id: c._id,
-                            valid: true,
-                            message: ""
+                        var message = gcm.Message();
+
+                        message.addNotification('title', 'Hello');
+                        message.addNotification('icon', 'ic_launcher');
+                        message.addNotification('body', 'World');
+
+                        var regTokens = [a.reg_id];
+                        var sender = new gcm.Sender('AIzaSyCYUwtrhtXlGPuXKrgwBpOYPXkdmEaqR8Y');
+
+                        sender.send(message, regTokens, function (err, response) {
+                            if(err) {
+                                console.error(err);
+                            } else {
+                                console.log(response);
+                                res.json({
+                                    user_id: c._id,
+                                    valid: true,
+                                    message: ""
+                                });
+                            }
                         });
                     }
                 });
@@ -145,6 +163,7 @@ router.post('/signup', function(req, res){
                     },
                     avatar: req.header("avatar")
                 };
+
                 var driver = new Driver(data_driver);
                 driver.save(function(err, d){
                     if(err){
@@ -160,6 +179,12 @@ router.post('/signup', function(req, res){
                             message: ""
                         });
                     }
+                });
+            }
+            else {
+                res.json({
+                    valid: false,
+                    message: "Not valid operation"
                 });
             }
         }
