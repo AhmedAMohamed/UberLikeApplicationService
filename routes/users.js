@@ -2,7 +2,7 @@
  * Created by AhmedA on 4/11/2016.
  */
 var express = require('express');
-var gcm = require('node-gcm-service');
+var gcm = require('android-gcm');
 
 var User = require('../models/user');
 var Driver = require('../models/driver');
@@ -126,14 +126,26 @@ router.post('/signup', function(req, res){
                     }
                     else {
 
+
                         res.json({
                             user_id: c._id,
                             valid: true,
                             message: "",
                             re: "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                         });
+
+                        var gcmObject = new gcm.AndroidGcm('AIzaSyBr6_kLRRLByjUJPE1kH83fmGhN5uA0KjY');
+                        var message = new gcm.Message({
+                            registration_ids: ['cgiA6RcWJKo:APA91bFToaHL35sgQrtC3j0NkOhfJmhyAWede5xOOHBC6uVsvJXt1m6FGGAhCyMGMnC3MZjiaBHVoJPm9oyX8HjxrdYoiCtRAwH3kNCvPERfTAArTyS3RNIrxAaDPGAIXS2QpgJq4ef-'],
+                            notification: {
+                                title: 'Ahmed',
+                                body: 'Says Hello'
+                            }
+                        });
+
+                        gcmObject.send(message, function(err, response) {});
                     }
-                        /*
+                    /*
                         var message = gcm.Message();
 
                         message.addNotification('title', 'Hello');
@@ -150,8 +162,7 @@ router.post('/signup', function(req, res){
 
                             }
                         });
-                        */
-
+                    */
                 });
             }
             else if (req.header ("type") == 'driver'){
