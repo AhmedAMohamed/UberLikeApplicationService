@@ -136,7 +136,7 @@ router.post('/signup', function(req, res){
 
                         sender.send(message, regTokens, function (err, response) {
                             if(err) {
-                                res.json(err)
+                                res.json(err);
                             } else {
                                 res.json({
                                     user_id: c._id,
@@ -146,7 +146,6 @@ router.post('/signup', function(req, res){
                                 });
                             }
                         });
-
                     }
                 });
             }
