@@ -134,6 +134,7 @@ router.post('/signup', function(req, res){
                         var regTokens = [a.reg_id];
                         var sender = new gcm.Sender('AIzaSyCYUwtrhtXlGPuXKrgwBpOYPXkdmEaqR8Y');
 
+                        /*
                         sender.send(message, regTokens, function (err, response) {
                             if(err) {
                                 console.error(err);
@@ -146,6 +147,7 @@ router.post('/signup', function(req, res){
                                 });
                             }
                         });
+                        */
                     }
                 });
             }
