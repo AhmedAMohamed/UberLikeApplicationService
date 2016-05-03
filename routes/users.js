@@ -124,40 +124,15 @@ router.post('/signup', function(req, res){
                             message: "error in client registration"
                         });
                     }
-                    else{
-                        request(
-                            { method: 'POST',
-                                uri: 'https://android.googleapis.com/gcm/send',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                    'Authorization':'key=AIzaSyBr6_kLRRLByjUJPE1kH83fmGhN5uA0KjY'
-                                },
-                                body: JSON.stringify({
-                                    "registration_ids" : [a.reg_id],
-                                    "data" : {
-                                        "title": "Ahmed Alaa"
-                                    },
-                                    "time_to_live": 108
-                                })
-                            }
-                            , function (error, response, body) {
-                                if(error) {
-                                    res.json({
-                                        valid: false,
-                                        message: "Wrong data"
-                                    });
-                                }
-                                else {
-                                    res.json({
-                                        user_id: c._id,
-                                        valid: true,
-                                        message: "",
-                                        re: "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                                    });
-                                }
-                            }
-                        );
+                    else {
 
+                        res.json({
+                            user_id: c._id,
+                            valid: true,
+                            message: "",
+                            re: "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                        });
+                    }
                         /*
                         var message = gcm.Message();
 
@@ -176,7 +151,7 @@ router.post('/signup', function(req, res){
                             }
                         });
                         */
-                    }
+
                 });
             }
             else if (req.header ("type") == 'driver'){
