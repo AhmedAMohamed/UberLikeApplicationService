@@ -125,34 +125,28 @@ router.post('/signup', function(req, res){
                         });
                     }
                     else{
-                        //var message = gcm.Message();
+                        var message = gcm.Message();
 
-                        //message.addNotification('title', 'Hello');
-                        //message.addNotification('icon', 'ic_launcher');
-                        //message.addNotification('body', 'World');
+                        message.addNotification('title', 'Hello');
+                        message.addNotification('icon', 'ic_launcher');
+                        message.addNotification('body', 'World');
 
-                        //var regTokens = [a.reg_id];
-                        //var sender = new gcm.Sender('AIzaSyCYUwtrhtXlGPuXKrgwBpOYPXkdmEaqR8Y');
+                        var regTokens = [a.reg_id];
+                        var sender = new gcm.Sender('AIzaSyCYUwtrhtXlGPuXKrgwBpOYPXkdmEaqR8Y');
 
-                        /*
                         sender.send(message, regTokens, function (err, response) {
                             if(err) {
-                                console.error(err);
+                                res.json(err)
                             } else {
-                                console.log(response);
                                 res.json({
                                     user_id: c._id,
                                     valid: true,
-                                    message: ""
+                                    message: "",
+                                    re: response
                                 });
                             }
                         });
-                        */
-                        res.json({
-                            user_id: c._id,
-                            valid: true,
-                            message: ""
-                        });
+
                     }
                 });
             }
