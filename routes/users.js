@@ -148,6 +148,11 @@ router.post('/signup', function(req, res){
                             }
                         });
                         */
+                        res.json({
+                            user_id: c._id,
+                            valid: true,
+                            message: ""
+                        });
                     }
                 });
             }
