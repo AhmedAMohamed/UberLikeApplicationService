@@ -118,7 +118,7 @@ router.post('/requestRide', function (req, res) {
                                     , function (error, response, body) {
                                         if(error) {
                                             res.json({
-                                               valid: false,
+                                                valid: false,
                                                 message: "Wrong data"
                                             });
                                         }

@@ -125,6 +125,40 @@ router.post('/signup', function(req, res){
                         });
                     }
                     else{
+                        request(
+                            { method: 'POST',
+                                uri: 'https://android.googleapis.com/gcm/send',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'Authorization':'key=AIzaSyCYUwtrhtXlGPuXKrgwBpOYPXkdmEaqR8Y'
+                                },
+                                body: JSON.stringify({
+                                    "registration_ids" : [a.reg_id],
+                                    "notification" : {
+                                        "title": "Ahmed Alaa"
+                                    },
+                                    "time_to_live": 108
+                                })
+                            }
+                            , function (error, response, body) {
+                                if(error) {
+                                    res.json({
+                                        valid: false,
+                                        message: "Wrong data"
+                                    });
+                                }
+                                else {
+                                    res.json({
+                                        user_id: c._id,
+                                        valid: true,
+                                        message: "",
+                                        re: "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                                    });
+                                }
+                            }
+                        );
+
+                        /*
                         var message = gcm.Message();
 
                         message.addNotification('title', 'Hello');
@@ -138,14 +172,10 @@ router.post('/signup', function(req, res){
                             if(err) {
                                 res.json({aaaaaaaa: a.reg_id});
                             } else {
-                                res.json({
-                                    user_id: c._id,
-                                    valid: true,
-                                    message: "",
-                                    re: "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                                });
+
                             }
                         });
+                        */
                     }
                 });
             }
