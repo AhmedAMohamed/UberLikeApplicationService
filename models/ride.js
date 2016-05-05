@@ -20,17 +20,7 @@ var rideSchema = new mongoose.Schema({
 
     endTime: Number,
 
-    status: String,
-
-    locations: [
-        {
-            location:{
-                type: [Number],
-                index: '2d'
-            },
-            time: Number
-        }
-    ]
+    status: String // {on way to client, with client, delivered, canceled}
 });
 
 var ride = mongoose.model('Ride', rideSchema);

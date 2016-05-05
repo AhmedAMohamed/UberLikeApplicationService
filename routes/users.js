@@ -125,18 +125,6 @@ router.post('/signup', function(req, res){
                         });
                     }
                     else {
-
-                        var gcmObject = new gcm.AndroidGcm('AIzaSyBr6_kLRRLByjUJPE1kH83fmGhN5uA0KjY');
-                        var message = new gcm.Message({
-                            registration_ids: ['cgiA6RcWJKo:APA91bFToaHL35sgQrtC3j0NkOhfJmhyAWede5xOOHBC6uVsvJXt1m6FGGAhCyMGMnC3MZjiaBHVoJPm9oyX8HjxrdYoiCtRAwH3kNCvPERfTAArTyS3RNIrxAaDPGAIXS2QpgJq4ef-', "fkN9pY2uApk:APA91bEHlt6Ft8z58bq1OXAzqzapPFtn1eX9xqiJfxNaKZ_cOLSIyaK_YIfI6xzSENZSmULn6WTgdJ0ysVfVQKB33xDg4MM0bLF_jwMlUrQSVW2oGS4HXhU-4q_fQ3ioMlTG6Xq7HrJn"],
-                            notification: {
-                                title: 'Ahmed',
-                                body: 'Says Hello'
-                            }
-                        });
-
-                        gcmObject.send(message, function(err, response) {});
-
                         res.json({
                             user_id: c._id,
                             valid: true,
@@ -144,24 +132,6 @@ router.post('/signup', function(req, res){
                             re: "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                         });
                     }
-                    /*
-                        var message = gcm.Message();
-
-                        message.addNotification('title', 'Hello');
-                        message.addNotification('icon', 'ic_launcher');
-                        message.addNotification('body', 'World');
-
-                        var regTokens = [a.reg_id];
-                        var sender = new gcm.Sender('AIzaSyCYUwtrhtXlGPuXKrgwBpOYPXkdmEaqR8Y');
-
-                        sender.send(message, regTokens, function (err, response) {
-                            if(err) {
-                                res.json({aaaaaaaa: a.reg_id});
-                            } else {
-
-                            }
-                        });
-                    */
                 });
             }
             else if (req.header ("type") == 'driver'){

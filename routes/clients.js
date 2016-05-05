@@ -50,7 +50,6 @@ router.get('/getNearDrivers', function(req, res) {
                }
             });
         }
-
     });
 });
 
@@ -68,8 +67,12 @@ router.post('/requestRide', function (req, res) {
 
     var clientID = req.header('client_id');
     var driverID = req.header('driver_id');
-    var fromLocation = req.header('from');
-    var toLocation = req.header('to');
+
+    var fromLocationLat = req.header('from_lat');
+    var fromLocationLng = req.header('from_lng');
+
+    var toLocationLat = req.header('to_lat');
+    var toLocationLng = req.header('to_lng');
 
     Client.findById(clientID, function (err, client) {
         if(err) {
@@ -109,8 +112,10 @@ router.post('/requestRide', function (req, res) {
                                             "data" : {
                                                 "from_id": clientID,
                                                 "to_id": driverID,
-                                                "from": fromLocation,
-                                                "to": toLocation
+                                                "from_lat": fromLocationLat,
+                                                "from_lng": fromLocationLng,
+                                                "to_lat": toLocationLat,
+                                                "to_lng": toLocationLng
                                             },
                                             "time_to_live": 108
                                         })
@@ -165,6 +170,51 @@ router.post('/requestRide', function (req, res) {
                             message: "Not available"
                         });
                     }
+                }
+            });
+        }
+    });
+});
+
+router.get('/getRidesHistory', function (req, res) {
+
+    var clientId = req.header('client_id');
+    Client.findById(clientId, function(err, client){
+        if(err) {
+            res.json({
+                valid: false,
+                message: "Not valid client access"
+            });
+        }
+        else {
+            User.findOne({_id: client.personalData}, 'rides', function (err, user) {
+                if(err) {
+                    res.json({
+                        valid: false,
+                        message: "Unexpected error"
+                    });
+                }
+                else {
+                    Ride.find({
+                        _id: {
+                            $in: user.rides
+                        }
+                    }, function (err, rides) {
+                        if(err) {
+                            res.json({
+                                valid: false,
+                                message: "Not valid client access"
+                            });
+                        }
+                        else {
+                            res.json({
+                                valid: true,
+                                client_id: clientId,
+                                message: "",
+                                data: rides
+                            });
+                        }
+                    });
                 }
             });
         }

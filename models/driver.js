@@ -9,6 +9,7 @@ var driversSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
+    // Driver status {available, busy, out of service}
     status: {
         type: String, default: "available"
     },

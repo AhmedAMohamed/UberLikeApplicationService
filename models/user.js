@@ -12,20 +12,10 @@ var UserSchema = new mongoose.Schema({
     type: String,
     reg_id: String,
 
-    rides:[{
-        from: {
-            location: {
-                type: [Number],
-                index: '2d'
-            }
-        },
-        to: {
-            location: {
-                type: [Number],
-                index: '2d'
-            }
-        }
-    }]
+    rides: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Ride'
+    }
 });
 
 var users = mongoose.model('User', UserSchema);
