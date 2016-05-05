@@ -2,7 +2,7 @@
  * Created by AhmedA on 4/11/2016.
  */
 var express = require('express');
-var request = require('requests');
+var request = require('request');
 
 var router = express.Router();
 
@@ -228,4 +228,5 @@ router.get('/getRidesHistory', function (req, res) {
         });
     }
 });
+
 module.exports = router;
