@@ -179,45 +179,53 @@ router.post('/requestRide', function (req, res) {
 router.get('/getRidesHistory', function (req, res) {
 
     var clientId = req.header('client_id');
-    Client.findById(clientId, function(err, client){
-        if(err) {
-            res.json({
-                valid: false,
-                message: "Not valid client access"
-            });
-        }
-        else {
-            User.findOne({_id: client.personalData}, 'rides', function (err, user) {
-                if(err) {
-                    res.json({
-                        valid: false,
-                        message: "Unexpected error"
-                    });
-                }
-                else {
-                    Ride.find({
-                        _id: {
-                            $in: user.rides
-                        }
-                    }, function (err, rides) {
-                        if(err) {
-                            res.json({
-                                valid: false,
-                                message: "Not valid client access"
-                            });
-                        }
-                        else {
-                            res.json({
-                                valid: true,
-                                client_id: clientId,
-                                message: "",
-                                data: rides
-                            });
-                        }
-                    });
-                }
-            });
-        }
-    });
+    if(clientId) {
+        Client.findById(clientId, function(err, client){
+            if(err) {
+                res.json({
+                    valid: false,
+                    message: "Not valid client access"
+                });
+            }
+            else {
+                User.findOne({_id: client.personalData}, 'rides', function (err, user) {
+                    if(err) {
+                        res.json({
+                            valid: false,
+                            message: "Unexpected error"
+                        });
+                    }
+                    else {
+                        Ride.find({
+                            _id: {
+                                $in: user.rides
+                            }
+                        }, function (err, rides) {
+                            if(err) {
+                                res.json({
+                                    valid: false,
+                                    message: "Not valid client access"
+                                });
+                            }
+                            else {
+                                res.json({
+                                    valid: true,
+                                    client_id: clientId,
+                                    message: "",
+                                    data: rides
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    }
+    else {
+        res.json({
+            valid: false,
+            message: "Not valid ID"
+        });
+    }
 });
 module.exports = router;
