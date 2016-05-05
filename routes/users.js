@@ -249,7 +249,6 @@ router.put('/updateUserLocation', function(req, res){
     }
 });
 
-
 router.get('/checkGCM', function (req, res) {
     request({
             "uri": "https://gcm-http.googleapis.com/gcm/send",
@@ -285,6 +284,5 @@ router.get('/checkGCM', function (req, res) {
             }
         }
     );
-
 });
 module.exports = router;
