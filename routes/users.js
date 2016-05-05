@@ -7,6 +7,7 @@ var request = require('request');
 var User = require('../models/user');
 var Driver = require('../models/driver');
 var Client = require('../models/client');
+var Ride = require('../models/ride');
 
 var router = express.Router();
 
@@ -278,7 +279,53 @@ router.put('/updateUserLocation', function(req, res){
                         }
                         else if (d.status == "busy"){
                             // use GCM client on ride
+                            Ride.find({driver: d._id}, function(err, rides) {
+                                if(err) {
+                                    res.json({valid: false, message: "driver has no ride"});
+                                }
+                                if(rides.length == 1) {
+                                    request(
+                                        {
+                                            method: 'POST',
+                                            uri: 'https://android.googleapis.com/gcm/send',
+                                            headers: {
+                                                'Content-Type': 'application/json',
+                                                'Authorization': 'key=Your API Key'
+                                            },
+                                            body: JSON.stringify({
+                                                    "registration_ids": rides.client,
+                                                    "data": {
+                                                        "location": d.currentLocation,
+                                                    }
+                                                }
+                                            )
+                                        }
+                                        , function (error, response, body) {
+                                            if(error){
+                                                res.json({
+                                                    valid: false,
+                                                    message: "ERROR"
+                                                });
+                                            }
+                                            else {
+                                                res.json({
+                                                    valid: true,
+                                                    driverId: d._id,
+                                                    message: ""
+                                                });
+                                            }
 
+                                        }
+                                    )
+                                }
+                                else {
+                                    res.json(
+                                        {
+                                            valid: false,
+                                            message: "error"
+                                        });
+                                }
+                            });
                         }
                         else if (d. status == "outService"){
                             
