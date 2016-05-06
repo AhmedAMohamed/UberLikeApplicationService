@@ -92,7 +92,7 @@ router.post('/requestRide', function (req, res) {
                 else {
                     if(driver.status == "available") {
                         driver.status = "busy";
-                        User.findById(driver.personalData, function (err, user) {
+                        User.findById(driver.personalData, function (err, driverUser) {
                             if(err) {
                                 res.json({
                                     valid: false,
@@ -100,12 +100,97 @@ router.post('/requestRide', function (req, res) {
                                 });
                             }
                             else {
+                                var rideData = {
+                                    client: clientID,
+                                    driver: driverID,
+                                    from: [
+                                        fromLocationLat,
+                                        fromLocationLng
+                                    ],
+                                    to: [
+                                        toLocationLat,
+                                        toLocationLng
+                                    ],
+                                    status: "on way"
+                                }
+                                var ride = new Ride(rideData);
+                                ride.save(function (err, r) {
+                                    if(err) {
+                                        res.json({
+                                                valid: false,
+                                                message: "Wrong operation"
+                                        });
+                                    }
+                                    else {
+                                        driver.currentRide = r._id;
+                                        driver.status = "busy";
+                                        driver.save(function (err, d) {
+                                            if(err) {
+                                                res.json({
+                                                    valid: false,
+                                                    message: "wrong operation"
+                                                });
+                                            }
+                                            else {
+                                                request({
+                                                        "uri": "https://gcm-http.googleapis.com/gcm/send",
+                                                        "method": "POST",
+                                                        "headers": { //We can define headers too
+                                                            'Content-Type': 'application/json',
+                                                            'Authorization': 'key=AIzaSyBr6_kLRRLByjUJPE1kH83fmGhN5uA0KjY'
+                                                        },
+                                                        body: JSON.stringify(
+                                                            {
+                                                                "registration_ids": [d.reg_id],
+                                                                "notification": {
+                                                                    "title": "Driving request",
+                                                                    "body": "A new driving request"
+                                                                },
+                                                                "data": {
+                                                                     "from_location": {
+                                                                        "lat": fromLocationLat,
+                                                                        "lng": fromLocationLng
+                                                                    },
+                                                                    "to_location": {
+                                                                        "lat": toLocationLat,
+                                                                        "lng": toLocationLng
+                                                                    }
+                                                                },
+                                                                "time_to_live": 108
+                                                            }
+                                                        )
+                                                    }
+                                                    , function (error, response, body) {
+                                                        if(error) {
+                                                            res.json({
+                                                                valid: false,
+                                                                status: "notify",
+                                                                message: "Ride confirmed but the driver did not notified yet"
+                                                            });
+                                                        }
+                                                        else {
+                                                            res.json({
+                                                                valid: true,
+                                                                message: "",
+                                                                ride_id: r._id,
+                                                                client_id: clientID
+                                                            });
+                                                        }
+                                                    }
+                                                );
+                                            }
+                                        });
+                                    }
+                                });
+
+                                /*
                                 request(
-                                    { method: 'POST',
-                                        uri: 'https://android.googleapis.com/gcm/send',
-                                        headers: {
+                                    {
+                                        "uri": "https://gcm-http.googleapis.com/gcm/send",
+                                        "method": "POST",
+                                        "headers": { //We can define headers too
                                             'Content-Type': 'application/json',
-                                            'Authorization':'key=AIzaSyCYUwtrhtXlGPuXKrgwBpOYPXkdmEaqR8Y'
+                                            'Authorization': 'key=AIzaSyBr6_kLRRLByjUJPE1kH83fmGhN5uA0KjY'
                                         },
                                         body: JSON.stringify({
                                             "registration_ids" : [user.reg_id],
@@ -161,6 +246,7 @@ router.post('/requestRide', function (req, res) {
                                         }
                                     }
                                 );
+                                */
                             }
                         });
                     }

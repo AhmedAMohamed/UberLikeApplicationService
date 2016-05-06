@@ -16,6 +16,16 @@ var rideSchema = new mongoose.Schema({
         ref: 'Driver'
     },
 
+    from: {
+        type: [Number],
+        index: '2d'
+    },
+
+    to: {
+        type: [Number],
+        index: '2d'
+    },
+
     startTime: Number,
 
     endTime: Number,
