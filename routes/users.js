@@ -288,9 +288,9 @@ router.get('/checkGCM', function (req, res) {
                 'Authorization': 'key=AIzaSyBr6_kLRRLByjUJPE1kH83fmGhN5uA0KjY'
             },
             "body": JSON.stringify({
-                "registration_ids": ["fuOZewt6aPs:APA91bEsuX4HlloxWKM5eZ8tefj_26cjvL9ouD7n-2ZJLiXEejKgXhCCiStvPwQEqM8-rxtT4aQQBF2vRwVTFUGV69Kkyh4y5ah4uvbul9vNGvosHKzxgTlhXZDv9K6TH1X7JVq2InPS"],
-                "data": {
-                    "title": "",
+                "registration_ids": ["eC9-_bYOJeE:APA91bFnn8RQrbI69_Us7gLwdzNQ40KxYQ5kwbtCmLcai0ORKskHeiHTIY89dkPgLTIwhk0X-5n2lMpfFBy4G7gO04l1OMreq1b8KEprxUhSsVP9D6P8H8fof3Ab_87U8zcCP82eMBCI","eC9-_bYOJeE:APA91bFnn8RQrbI69_Us7gLwdzNQ40KxYQ5kwbtCmLcai0ORKskHeiHTIY89dkPgLTIwhk0X-5n2lMpfFBy4G7gO04l1OMreq1b8KEprxUhSsVP9D6P8H8fof3Ab_87U8zcCP82eMBCI"],
+                "notification": {
+                    "title": "AAAAAAAAAAAAAAAAAAAAA",
                     "icon": "",
                     "body": ""
                 }
