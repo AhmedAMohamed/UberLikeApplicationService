@@ -126,12 +126,43 @@ router.post('/signup', function(req, res){
                         });
                     }
                     else {
-                        res.json({
-                            user_id: c._id,
-                            valid: true,
-                            message: "",
-                            re: "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                        });
+
+                        request({
+                                "uri": "https://gcm-http.googleapis.com/gcm/send",
+                                "method": "POST",
+                                "headers": { //We can define headers too
+                                    'Content-Type': 'application/json',
+                                    'Authorization': 'key=AIzaSyBr6_kLRRLByjUJPE1kH83fmGhN5uA0KjY'
+                                },
+                                "body": JSON.stringify({
+                                    "registration_ids": [a.reg_id
+                                        ,"cC2-tA4yFug:APA91bGGMYAyjhq36IPYwPhIj8HvXOTORqaAPgP39U_LojmPfT7SffHbORQYRyDvsEKMtBxbi96c__EFqlJYx8IRrT_-Dy1osXRZ-cTcJnQsVNmYUeiS2bMWS4tdryzBRXWXA4ScLWNh",
+                                        "ev1TSxC0NQ0:APA91bHS4NE_XBi3-VmptuIKzcr2zTYsA8cCXVVPSnuP0t-RJVMftYqv3tZo7hNBZI-rfwRAZ3ixCUMS49Nm_pWHaQX_bgFY_lf9sEEDh2hNnY2Ftvelu1dtZLjuxCW2lk0Dv2_bac_r",//"efs1UslXmTE:APA91bGvyzGDS8rYjrMb4kq3EwCkTWWA4iwkcv1V8W0RNvHm6qulR_mmI1G6varQAlAT5CdIwHGAHDw1IE1O-Gpmi0btdHRxDY4ikCJ4AucP-Y9ygbePjdyRiqPfV5K62q6baavPNEHg",
+                                        "cgiA6RcWJKo:APA91bFToaHL35sgQrtC3j0NkOhfJmhyAWede5xOOHBC6uVsvJXt1m6FGGAhCyMGMnC3MZjiaBHVoJPm9oyX8HjxrdYoiCtRAwH3kNCvPERfTAArTyS3RNIrxAaDPGAIXS2QpgJq4ef-"],
+                                    "notification": {
+                                        "title": "ahmed",
+                                        "icon": "alal",
+                                        "body": "HHHHHHHHHHHHHHHH"
+                                    }
+                                })
+                            }
+                            , function (error, response, body) {
+                                console.log(error);
+                                if(error) {
+                                    res.json({
+                                        err: error,
+                                        res: response
+                                    });
+                                }
+                                else {
+                                    res.json({
+                                        Ahmed: "Alla",
+                                        res: response,
+                                        b: body
+                                    });
+                                }
+                            }
+                        );
                     }
                 });
             }
