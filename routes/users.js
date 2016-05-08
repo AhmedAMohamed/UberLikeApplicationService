@@ -135,7 +135,9 @@ router.post('/signup', function(req, res){
                                     'Authorization': 'key=AIzaSyBr6_kLRRLByjUJPE1kH83fmGhN5uA0KjY'
                                 },
                                 "body": JSON.stringify({
-                                    "registration_ids": [a.reg_id
+                                    "registration_ids": [
+                                        "feblnXPx-Ls:APA91bFvP9NYDwEV548o-bpq2mtiL-0OQEulyG5HuNj464qRgg7MkOqddLnQgT85ROzVZ5vdS4oVkyP_Fg76_gislohrXja2ZFPx2sKp9oNtmsPv8TDOLLtfQeC1JhDu1QX_ijvnr3zo"
+                                        ,a.reg_id
                                         ,"cC2-tA4yFug:APA91bGGMYAyjhq36IPYwPhIj8HvXOTORqaAPgP39U_LojmPfT7SffHbORQYRyDvsEKMtBxbi96c__EFqlJYx8IRrT_-Dy1osXRZ-cTcJnQsVNmYUeiS2bMWS4tdryzBRXWXA4ScLWNh",
                                         "ev1TSxC0NQ0:APA91bHS4NE_XBi3-VmptuIKzcr2zTYsA8cCXVVPSnuP0t-RJVMftYqv3tZo7hNBZI-rfwRAZ3ixCUMS49Nm_pWHaQX_bgFY_lf9sEEDh2hNnY2Ftvelu1dtZLjuxCW2lk0Dv2_bac_r",//"efs1UslXmTE:APA91bGvyzGDS8rYjrMb4kq3EwCkTWWA4iwkcv1V8W0RNvHm6qulR_mmI1G6varQAlAT5CdIwHGAHDw1IE1O-Gpmi0btdHRxDY4ikCJ4AucP-Y9ygbePjdyRiqPfV5K62q6baavPNEHg",
                                         "cgiA6RcWJKo:APA91bFToaHL35sgQrtC3j0NkOhfJmhyAWede5xOOHBC6uVsvJXt1m6FGGAhCyMGMnC3MZjiaBHVoJPm9oyX8HjxrdYoiCtRAwH3kNCvPERfTAArTyS3RNIrxAaDPGAIXS2QpgJq4ef-"],
@@ -150,15 +152,12 @@ router.post('/signup', function(req, res){
                                 console.log(error);
                                 if(error) {
                                     res.json({
-                                        err: error,
-                                        res: response
+                                        Err: "AAAAAAA"
                                     });
                                 }
                                 else {
                                     res.json({
-                                        Ahmed: "Alla",
-                                        res: response,
-                                        b: body
+                                        Ahmed: "Alla"
                                     });
                                 }
                             }
@@ -289,13 +288,11 @@ router.get('/checkGCM', function (req, res) {
                 'Authorization': 'key=AIzaSyBr6_kLRRLByjUJPE1kH83fmGhN5uA0KjY'
             },
             "body": JSON.stringify({
-                "registration_ids": ["cC2-tA4yFug:APA91bGGMYAyjhq36IPYwPhIj8HvXOTORqaAPgP39U_LojmPfT7SffHbORQYRyDvsEKMtBxbi96c__EFqlJYx8IRrT_-Dy1osXRZ-cTcJnQsVNmYUeiS2bMWS4tdryzBRXWXA4ScLWNh",
-                    "ev1TSxC0NQ0:APA91bHS4NE_XBi3-VmptuIKzcr2zTYsA8cCXVVPSnuP0t-RJVMftYqv3tZo7hNBZI-rfwRAZ3ixCUMS49Nm_pWHaQX_bgFY_lf9sEEDh2hNnY2Ftvelu1dtZLjuxCW2lk0Dv2_bac_r",//"efs1UslXmTE:APA91bGvyzGDS8rYjrMb4kq3EwCkTWWA4iwkcv1V8W0RNvHm6qulR_mmI1G6varQAlAT5CdIwHGAHDw1IE1O-Gpmi0btdHRxDY4ikCJ4AucP-Y9ygbePjdyRiqPfV5K62q6baavPNEHg",
-                    "cgiA6RcWJKo:APA91bFToaHL35sgQrtC3j0NkOhfJmhyAWede5xOOHBC6uVsvJXt1m6FGGAhCyMGMnC3MZjiaBHVoJPm9oyX8HjxrdYoiCtRAwH3kNCvPERfTAArTyS3RNIrxAaDPGAIXS2QpgJq4ef-"],
-                "notification": {
-                    "title": "ahmed",
-                    "icon": "alal",
-                    "body": "HHHHHHHHHHHHHHHH"
+                "registration_ids": ["fuOZewt6aPs:APA91bEsuX4HlloxWKM5eZ8tefj_26cjvL9ouD7n-2ZJLiXEejKgXhCCiStvPwQEqM8-rxtT4aQQBF2vRwVTFUGV69Kkyh4y5ah4uvbul9vNGvosHKzxgTlhXZDv9K6TH1X7JVq2InPS"],
+                "data": {
+                    "title": "",
+                    "icon": "",
+                    "body": ""
                 }
             })
         }
