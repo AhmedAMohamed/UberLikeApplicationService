@@ -136,11 +136,7 @@ router.post('/signup', function(req, res){
                                 },
                                 "body": JSON.stringify({
                                     "registration_ids": [
-                                        "feblnXPx-Ls:APA91bFvP9NYDwEV548o-bpq2mtiL-0OQEulyG5HuNj464qRgg7MkOqddLnQgT85ROzVZ5vdS4oVkyP_Fg76_gislohrXja2ZFPx2sKp9oNtmsPv8TDOLLtfQeC1JhDu1QX_ijvnr3zo"
-                                        ,a.reg_id
-                                        ,"cC2-tA4yFug:APA91bGGMYAyjhq36IPYwPhIj8HvXOTORqaAPgP39U_LojmPfT7SffHbORQYRyDvsEKMtBxbi96c__EFqlJYx8IRrT_-Dy1osXRZ-cTcJnQsVNmYUeiS2bMWS4tdryzBRXWXA4ScLWNh",
-                                        "ev1TSxC0NQ0:APA91bHS4NE_XBi3-VmptuIKzcr2zTYsA8cCXVVPSnuP0t-RJVMftYqv3tZo7hNBZI-rfwRAZ3ixCUMS49Nm_pWHaQX_bgFY_lf9sEEDh2hNnY2Ftvelu1dtZLjuxCW2lk0Dv2_bac_r",//"efs1UslXmTE:APA91bGvyzGDS8rYjrMb4kq3EwCkTWWA4iwkcv1V8W0RNvHm6qulR_mmI1G6varQAlAT5CdIwHGAHDw1IE1O-Gpmi0btdHRxDY4ikCJ4AucP-Y9ygbePjdyRiqPfV5K62q6baavPNEHg",
-                                        "cgiA6RcWJKo:APA91bFToaHL35sgQrtC3j0NkOhfJmhyAWede5xOOHBC6uVsvJXt1m6FGGAhCyMGMnC3MZjiaBHVoJPm9oyX8HjxrdYoiCtRAwH3kNCvPERfTAArTyS3RNIrxAaDPGAIXS2QpgJq4ef-"],
+                                        a.reg_id],
                                     "notification": {
                                         "title": "ahmed",
                                         "icon": "alal",
@@ -288,7 +284,7 @@ router.get('/checkGCM', function (req, res) {
                 'Authorization': 'key=AIzaSyBr6_kLRRLByjUJPE1kH83fmGhN5uA0KjY'
             },
             "body": JSON.stringify({
-                "registration_ids": ["eC9-_bYOJeE:APA91bFnn8RQrbI69_Us7gLwdzNQ40KxYQ5kwbtCmLcai0ORKskHeiHTIY89dkPgLTIwhk0X-5n2lMpfFBy4G7gO04l1OMreq1b8KEprxUhSsVP9D6P8H8fof3Ab_87U8zcCP82eMBCI","eC9-_bYOJeE:APA91bFnn8RQrbI69_Us7gLwdzNQ40KxYQ5kwbtCmLcai0ORKskHeiHTIY89dkPgLTIwhk0X-5n2lMpfFBy4G7gO04l1OMreq1b8KEprxUhSsVP9D6P8H8fof3Ab_87U8zcCP82eMBCI"],
+                "registration_ids": ["dObykpbZ5HU:APA91bH_xdBeN7JHcRymyff-GB6QqB1e70kfK6LXSYZM29Ez74Holoe-PjnW8R6J7lt_NlcN-8IuywI6dDQE89Ssd86ITnmPImREgHVUbio_B0vDE-Wj3HbM7fArsScB2qouqnBwzZLd"],
                 "notification": {
                     "title": "AAAAAAAAAAAAAAAAAAAAA",
                     "icon": "",
