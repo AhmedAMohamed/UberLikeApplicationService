@@ -201,7 +201,7 @@ router.put('/updateUserLocation', function(req, res){
                                     //loop on clients
                                     var clientsList =[];
                                     for( client in clients){
-                                        clientsList.push(client);
+                                        clientsList.push(client.reg_id);
                                     }
                                     request(
                                         {
@@ -209,12 +209,12 @@ router.put('/updateUserLocation', function(req, res){
                                             uri: 'https://android.googleapis.com/gcm/send',
                                             headers: {
                                                 'Content-Type': 'application/json',
-                                                'Authorization': 'key=Your API Key'
+                                                'Authorization': 'key=AIzaSyBr6_kLRRLByjUJPE1kH83fmGhN5uA0KjY'
                                             },
                                             body: JSON.stringify({
                                                     "registration_ids": clientsList,
                                                     "data": {
-                                                        "location": d.currentLocation,
+                                                        "location": d.currentLocation
                                                     }
                                                 }
                                             )
