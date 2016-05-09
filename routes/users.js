@@ -284,11 +284,11 @@ router.get('/checkGCM', function (req, res) {
                 'Authorization': 'key=AIzaSyBr6_kLRRLByjUJPE1kH83fmGhN5uA0KjY'
             },
             "body": JSON.stringify({
-                "registration_ids": ["dObykpbZ5HU:APA91bH_xdBeN7JHcRymyff-GB6QqB1e70kfK6LXSYZM29Ez74Holoe-PjnW8R6J7lt_NlcN-8IuywI6dDQE89Ssd86ITnmPImREgHVUbio_B0vDE-Wj3HbM7fArsScB2qouqnBwzZLd"],
+                "registration_ids": ["cwVLmpBOkBo:APA91bG-1XjHkZwumGo1aggYf54pYtFR50oT0b9D7vM-A8h_LEj3HpY-yNmLDppWznImP-zilv3-j-kVvnKS5sR56vbLn1j5xtDXjOIQFt03jH13ChiL_ptvp9RrPBeamPk2CzQJnX_4"],
                 "notification": {
                     "title": "AAAAAAAAAAAAAAAAAAAAA",
                     "icon": "",
-                    "body": ""
+                    "body": "ljljlkj"
                 }
             })
         }
