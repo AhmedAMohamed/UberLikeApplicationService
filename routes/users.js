@@ -139,7 +139,7 @@ router.post('/signup', function(req, res){
                                         a.reg_id],
                                     "notification": {
                                         "title": "ahmed",
-                                        "icon": "alal",
+                                        "icon": "",
                                         "body": "HHHHHHHHHHHHHHHH"
                                     }
                                 })
@@ -284,11 +284,11 @@ router.get('/checkGCM', function (req, res) {
                 'Authorization': 'key=AIzaSyBr6_kLRRLByjUJPE1kH83fmGhN5uA0KjY'
             },
             "body": JSON.stringify({
-                "registration_ids": ["ce_BlL2KsAs:APA91bGSCbi0emgEC5KXaqEAoPRPXuPC4Cwvy8ejOQv_E_meKwDhUPf3MxlkUglbIJkBBBn_UsrUpusucbdpUxMnTrjaAy_mAj7mHCYWei-8s5l7EcUL1RgSJ76l0EklR9F4h4YHihU6"],
+                "registration_ids": ["fDPRbIgQY3w:APA91bF2ydwIgZprOnClM6KxuqT1GqXgMPeE1sTyijCiN3zH-SKBEgm6F_NIVIpm7XF__WMhpvxieYYpnR5nyCThPRUlciYmpfKoyXoqzblVqTpNqqOPeQXIcXleAbOMiBeJldODmzsy"],
                 "notification": {
                     "title": "AAAAAAAAAAAAAAAAAAAAA",
                     "icon": "",
-                    "body": "ljljlkj"
+                    "body": "Ahmed Alaa Moahamed Says Hello"
                 }
             })
         }
