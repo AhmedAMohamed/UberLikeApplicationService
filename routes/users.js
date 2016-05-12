@@ -7,6 +7,7 @@ var request = require('request');
 var User = require('../models/user');
 var Driver = require('../models/driver');
 var Client = require('../models/client');
+var Ride = require('../models/ride');
 
 var router = express.Router();
 
@@ -225,11 +226,116 @@ router.put('/updateUserLocation', function(req, res){
                             message: "not valid location"
                         });
                     }
-                    res.json({
-                        valid: true,
-                        driverId: d._id,
-                        message: ""
-                    });
+                   else {
+                        if (d.status == "available"){
+                            // use GCM clients within range
+                            Client.find({currentLocation : {$geoWithin: {$centerSphere:[
+                                    [Number(Location[0]), Number(Location[1])],
+                                    Number(r)
+                                ]}}
+                                },
+                                'reg_id', function(err, clients){
+                                    //loop on clients
+                                    var clientsList =[];
+                                    for( client in clients){
+                                        clientsList.push(client);
+                                    }
+                                    request(
+                                        {
+                                            method: 'POST',
+                                            uri: 'https://android.googleapis.com/gcm/send',
+                                            headers: {
+                                                'Content-Type': 'application/json',
+                                                'Authorization': 'key=Your API Key'
+                                            },
+                                            body: JSON.stringify({
+                                                    "registration_ids": clientsList,
+                                                    "data": {
+                                                        "location": d.currentLocation,
+                                                    }
+                                                }
+                                            )
+                                        }
+                                        , function (error, response, body) {
+                                            if(error){
+                                                res.json({
+                                                    valid: false,
+                                                    message: "ERROR"
+                                                });
+                                            }
+                                            else {
+                                                res.json({
+                                                    valid: true,
+                                                    driverId: d._id,
+                                                    message: ""
+                                                });
+                                            }
+
+                                        }
+                                    )
+
+                                }
+                            )
+                        }
+                        else if (d.status == "busy"){
+                            // use GCM client on ride
+                            Ride.find({driver: d._id}, function(err, rides) {
+                                if(err) {
+                                    res.json({valid: false, message: "driver has no ride"});
+                                }
+                                if(rides.length == 1) {
+                                    request(
+                                        {
+                                            method: 'POST',
+                                            uri: 'https://android.googleapis.com/gcm/send',
+                                            headers: {
+                                                'Content-Type': 'application/json',
+                                                'Authorization': 'key=Your API Key'
+                                            },
+                                            body: JSON.stringify({
+                                                    "registration_ids": rides.client,
+                                                    "data": {
+                                                        "location": d.currentLocation,
+                                                    }
+                                                }
+                                            )
+                                        }
+                                        , function (error, response, body) {
+                                            if(error){
+                                                res.json({
+                                                    valid: false,
+                                                    message: "ERROR"
+                                                });
+                                            }
+                                            else {
+                                                res.json({
+                                                    valid: true,
+                                                    driverId: d._id,
+                                                    message: ""
+                                                });
+                                            }
+
+                                        }
+                                    )
+                                }
+                                else {
+                                    res.json(
+                                        {
+                                            valid: false,
+                                            message: "error"
+                                        });
+                                }
+                            });
+                        }
+                        else if (d. status == "outService"){
+                            
+                        }
+                        res.json({
+                            valid: true,
+                            driverId: d._id,
+                            message: ""
+                        });
+                    }
                 });
             }
         });
