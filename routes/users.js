@@ -44,7 +44,6 @@ router.post('/login', function(req, res, next) {
                         else {
                             res.json(
                                 {
-                                    clients: clinets,
                                     valid: false,
                                     message: "server error"
                                 });
@@ -284,11 +283,9 @@ router.get('/checkGCM', function (req, res) {
                 'Authorization': 'key=AIzaSyBr6_kLRRLByjUJPE1kH83fmGhN5uA0KjY'
             },
             "body": JSON.stringify({
-                "registration_ids": ["fDPRbIgQY3w:APA91bF2ydwIgZprOnClM6KxuqT1GqXgMPeE1sTyijCiN3zH-SKBEgm6F_NIVIpm7XF__WMhpvxieYYpnR5nyCThPRUlciYmpfKoyXoqzblVqTpNqqOPeQXIcXleAbOMiBeJldODmzsy"],
-                "notification": {
-                    "title": "AAAAAAAAAAAAAAAAAAAAA",
-                    "icon": "",
-                    "body": "Ahmed Alaa Moahamed Says Hello"
+                "registration_ids": ["eXDwSUG7ZQ8:APA91bHY_VKzBLBAr28SmP5gjtHoKS--9xsg_cVHBcwDFhExDirEP81AxUMkmL9p9hrSIF2t_O4LOukEvOfI9AFkKVLjGSllkewXpH-MgxHTexyly9JCbZGXbjineAnNKeg0Xw36PIpy"],
+                "data": {
+                    "ahmed": "gggggg"
                 }
             })
         }
