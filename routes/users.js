@@ -29,11 +29,11 @@ router.post('/login', function(req, res, next) {
         else {
             if(users.length == 1) {
                 if(userType == "client") {
-                    Client.find({personalData: users[0]._id}, function(err, clinets) {
+                    Client.find({personalData: users[0]._id}, function(err, clients) {
                         if(err) {
                             res.json({valid: false, message: "Not a valid client access"});
                         }
-                        if(clinets.length == 1) {
+                        if(clients.length == 1) {
                             res.json(
                                 {
                                     client_id: clients[0]._id,
@@ -68,8 +68,6 @@ router.post('/login', function(req, res, next) {
                         else {
                             res.json(
                                 {
-                                    ussers: users,
-                                    drivers: drivers,
                                     valid: false,
                                     message: "Server error driver"
                                 }
@@ -126,7 +124,6 @@ router.post('/signup', function(req, res){
                         });
                     }
                     else {
-
                         request({
                                 "uri": "https://gcm-http.googleapis.com/gcm/send",
                                 "method": "POST",
@@ -158,6 +155,11 @@ router.post('/signup', function(req, res){
                                 }
                             }
                         );
+                        res.json({
+                            valid: true,
+                            message: "",
+                            client_id: c._id
+                        });
                     }
                 });
             }
@@ -251,7 +253,7 @@ router.put('/updateUserLocation', function(req, res){
                                             body: JSON.stringify({
                                                     "registration_ids": clientsList,
                                                     "data": {
-                                                        "location": d.currentLocation,
+                                                        "location": d.currentLocation
                                                     }
                                                 }
                                             )
@@ -295,7 +297,7 @@ router.put('/updateUserLocation', function(req, res){
                                             body: JSON.stringify({
                                                     "registration_ids": rides.client,
                                                     "data": {
-                                                        "location": d.currentLocation,
+                                                        "location": d.currentLocation
                                                     }
                                                 }
                                             )
