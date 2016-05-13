@@ -40,6 +40,7 @@ router.put('/updateDriverStatus', function(req, res) {
 });
 
 router.get('/getDriverData', function (req, res, next) {
+
     var driverId = req.header('driver_id');
     Driver.findById(driverId, function (err, driver) {
         if(err) {
