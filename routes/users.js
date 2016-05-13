@@ -124,37 +124,6 @@ router.post('/signup', function(req, res){
                         });
                     }
                     else {
-                        request({
-                                "uri": "https://gcm-http.googleapis.com/gcm/send",
-                                "method": "POST",
-                                "headers": { //We can define headers too
-                                    'Content-Type': 'application/json',
-                                    'Authorization': 'key=AIzaSyBr6_kLRRLByjUJPE1kH83fmGhN5uA0KjY'
-                                },
-                                "body": JSON.stringify({
-                                    "registration_ids": [
-                                        a.reg_id],
-                                    "notification": {
-                                        "title": "ahmed",
-                                        "icon": "",
-                                        "body": "HHHHHHHHHHHHHHHH"
-                                    }
-                                })
-                            }
-                            , function (error, response, body) {
-                                console.log(error);
-                                if(error) {
-                                    res.json({
-                                        Err: "AAAAAAA"
-                                    });
-                                }
-                                else {
-                                    res.json({
-                                        Ahmed: "Alla"
-                                    });
-                                }
-                            }
-                        );
                         res.json({
                             valid: true,
                             message: "",
@@ -175,7 +144,8 @@ router.post('/signup', function(req, res){
                         carNumber: req.header("carNumber"),
                         model: req.header("model")
                     },
-                    avatar: req.header("avatar")
+                    avatar: req.header("avatar"),
+                    status: "available"
                 };
 
                 var driver = new Driver(data_driver);
