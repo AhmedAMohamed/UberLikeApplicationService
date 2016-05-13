@@ -33,7 +33,7 @@ router.post('/login', function(req, res, next) {
                         if(err) {
                             res.json({valid: false, message: "Not a valid client access"});
                         }
-                        if(clients.length == 1) {
+                        else if(clients.length == 1) {
                             res.json(
                                 {
                                     client_id: clients[0]._id,
@@ -56,7 +56,7 @@ router.post('/login', function(req, res, next) {
                         if(err) {
                             res.json({valid: false, message: err});
                         }
-                        if(drivers.length == 1){
+                        else if(drivers.length == 1){
                             res.json(
                                 {
                                     driver_id: drivers[0]._id,
@@ -73,7 +73,6 @@ router.post('/login', function(req, res, next) {
                                 }
                             );
                         }
-
                     });
                 }
                 else {
