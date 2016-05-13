@@ -16,7 +16,7 @@ router.post('/login', function(req, res, next) {
     var pass = req.header('password');
     var mail = req.header('email');
 
-    var userType = "client";
+    var userType = req.header('type');
 
     User.find({
         email: mail,
@@ -362,8 +362,18 @@ router.get('/checkGCM', function (req, res) {
             },
             "body": JSON.stringify({
                 "registration_ids": ["eXDwSUG7ZQ8:APA91bHY_VKzBLBAr28SmP5gjtHoKS--9xsg_cVHBcwDFhExDirEP81AxUMkmL9p9hrSIF2t_O4LOukEvOfI9AFkKVLjGSllkewXpH-MgxHTexyly9JCbZGXbjineAnNKeg0Xw36PIpy"],
+                "collapse_key ": "demo",
                 "data": {
-                    "ahmed": "gggggg"
+                    "title": "updateLocation",
+                    "driver_location_data": {
+                        "driver_id": "sfdvsdlfgldfsgjljdskflgksdf",
+                        "driver_data": {
+                            "ay": "hariii"
+                        }
+                    },
+                    "driver_notification": {
+                        "data": "ahmed alaa"
+                    }
                 }
             })
         }
