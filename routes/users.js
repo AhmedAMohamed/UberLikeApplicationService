@@ -222,6 +222,7 @@ router.put('/updateUserLocation', function(req, res){
                                             "body": JSON.stringify({
                                                     "registration_ids": clientsList,
                                                     "data": {
+                                                        "to": "client",
                                                         "lat": d.currentLocation[0],
                                                         "lng": d.currentLocation[1],
                                                         "driver_id": d._id
