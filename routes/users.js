@@ -178,7 +178,7 @@ router.put('/updateUserLocation', function(req, res){
     var userType = req.header("type");
     if(userType == "driver") {
         var driverID = req.header("driver_id");
-        Driver.findOne({_id: driverID}, function (err, driver) {
+        Driver.findById(driverID, function (err, driver) {
             if(err) {
                 res.json({
                     valid: false,
@@ -213,17 +213,20 @@ router.put('/updateUserLocation', function(req, res){
                                     }
                                     request(
                                         {
-                                            method: 'POST',
-                                            uri: 'https://android.googleapis.com/gcm/send',
-                                            headers: {
+                                            "method": 'POST',
+                                            "uri": 'https://android.googleapis.com/gcm/send',
+                                            "headers": {
                                                 'Content-Type': 'application/json',
-                                                'Authorization': 'key=Your API Key'
+                                                'Authorization': 'key=AIzaSyBr6_kLRRLByjUJPE1kH83fmGhN5uA0KjY'
                                             },
-                                            body: JSON.stringify({
+                                            "body": JSON.stringify({
                                                     "registration_ids": clientsList,
                                                     "data": {
-                                                        "location": d.currentLocation
-                                                    }
+                                                        "lat": d.currentLocation[0],
+                                                        "lng": d.currentLocation[1],
+                                                        "driver_id": d._id
+                                                    },
+                                                    "collapse_key ": "driver"
                                                 }
                                             )
                                         }
@@ -261,13 +264,16 @@ router.put('/updateUserLocation', function(req, res){
                                             uri: 'https://android.googleapis.com/gcm/send',
                                             headers: {
                                                 'Content-Type': 'application/json',
-                                                'Authorization': 'key=Your API Key'
+                                                'Authorization': 'key=AIzaSyBr6_kLRRLByjUJPE1kH83fmGhN5uA0KjY'
                                             },
                                             body: JSON.stringify({
                                                     "registration_ids": rides.client,
                                                     "data": {
-                                                        "location": d.currentLocation
-                                                    }
+                                                        "lat": d.currentLocation[0],
+                                                        "lng": d.currentLocation[1],
+                                                        "driver_id": d._id
+                                                    },
+                                                    "collapse_key ": "driver"
                                                 }
                                             )
                                         }
@@ -299,13 +305,17 @@ router.put('/updateUserLocation', function(req, res){
                             });
                         }
                         else if (d. status == "outService"){
-                            
+                            res.json({
+                                valid: true,
+                                message: ""
+                            });
                         }
-                        res.json({
-                            valid: true,
-                            driverId: d._id,
-                            message: ""
-                        });
+                        else {
+                            res.json({
+                                valid: false,
+                                message: "Not a valid driver status"
+                            });
+                        }
                     }
                 });
             }
@@ -313,7 +323,7 @@ router.put('/updateUserLocation', function(req, res){
     }
     else if(userType == "client") {
         var clientID = req.header('client_id');
-        Client.findOne({_id: clientID}, function (err, client) {
+        Client.findById(clientID, function (err, client) {
             if(err) {
                 res.json({
                     valid: false,
