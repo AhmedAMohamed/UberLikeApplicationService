@@ -176,6 +176,7 @@ router.post('/signup', function(req, res){
 
 router.put('/updateUserLocation', function(req, res){
     var userType = req.header("type");
+    var r = "100";
     if(userType == "driver") {
         var driverID = req.header("driver_id");
         Driver.findById(driverID, function (err, driver) {
@@ -201,7 +202,7 @@ router.put('/updateUserLocation', function(req, res){
                         if (d.status == "available"){
                             // use GCM clients within range
                             Client.find({currentLocation : {$geoWithin: {$centerSphere:[
-                                    [Number(Location[0]), Number(Location[1])],
+                                    [Number(driver.currentLocation[0]), Number(driver.currentLocation[1])],
                                     Number(r)
                                 ]}}
                                 },
