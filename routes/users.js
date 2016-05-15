@@ -218,7 +218,7 @@ router.put('/updateUserLocation', function(req, res){
                                             "uri": 'https://android.googleapis.com/gcm/send',
                                             "headers": {
                                                 'Content-Type': 'application/json',
-                                                'Authorization': 'key=AIzaSyB_KKx-XyABDm9G8FbByiI4WTDpnuGPGgg'
+                                                'Authorization': 'key=AIzaSyBr6_kLRRLByjUJPE1kH83fmGhN5uA0KjY'
                                             },
                                             "body": JSON.stringify(
                                                 {
@@ -266,7 +266,7 @@ router.put('/updateUserLocation', function(req, res){
                                             uri: 'https://android.googleapis.com/gcm/send',
                                             headers: {
                                                 'Content-Type': 'application/json',
-                                                'Authorization': 'key=AIzaSyB_KKx-XyABDm9G8FbByiI4WTDpnuGPGgg'
+                                                'Authorization': 'key=AIzaSyBr6_kLRRLByjUJPE1kH83fmGhN5uA0KjY'
                                             },
                                             body: JSON.stringify({
                                                     "registration_ids": rides.client,

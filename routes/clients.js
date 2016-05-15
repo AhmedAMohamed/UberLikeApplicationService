@@ -143,19 +143,12 @@ router.post('/requestRide', function (req, res) {
                                                         body: JSON.stringify(
                                                             {
                                                                 "registration_ids": [d.reg_id],
-                                                                "notification": {
-                                                                    "title": "Driving request",
-                                                                    "body": "A new driving request"
-                                                                },
                                                                 "data": {
-                                                                     "from_location": {
-                                                                        "lat": fromLocationLat,
-                                                                        "lng": fromLocationLng
-                                                                    },
-                                                                    "to_location": {
-                                                                        "lat": toLocationLat,
-                                                                        "lng": toLocationLng
-                                                                    }
+                                                                    "to": "driver",
+                                                                    "from_lat": r.from[0],
+                                                                    "from_lng": r.from[1],
+                                                                    "to_lat": r.to[0],
+                                                                    "to_lng": r.to[1]
                                                                 },
                                                                 "time_to_live": 108
                                                             }
