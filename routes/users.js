@@ -157,7 +157,7 @@ router.post('/signup', function(req, res){
                     }
                     else{
                         res.json({
-                            user_id: d._id,
+                            driver_id: d._id,
                             valid: true,
                             message: ""
                         });
@@ -219,7 +219,8 @@ router.put('/updateUserLocation', function(req, res){
                                                 'Content-Type': 'application/json',
                                                 'Authorization': 'key=AIzaSyBr6_kLRRLByjUJPE1kH83fmGhN5uA0KjY'
                                             },
-                                            "body": JSON.stringify({
+                                            "body": JSON.stringify(
+                                                {
                                                     "registration_ids": clientsList,
                                                     "data": {
                                                         "to": "client",
@@ -248,7 +249,6 @@ router.put('/updateUserLocation', function(req, res){
 
                                         }
                                     )
-
                                 }
                             )
                         }
