@@ -176,7 +176,7 @@ router.post('/signup', function(req, res){
 
 router.put('/updateUserLocation', function(req, res){
     var userType = req.header("type");
-    var r = "100";
+    var r = "100000";
     if(userType == "driver") {
         var driverID = req.header("driver_id");
         Driver.findById(driverID, function (err, driver) {
@@ -218,7 +218,7 @@ router.put('/updateUserLocation', function(req, res){
                                             "uri": 'https://android.googleapis.com/gcm/send',
                                             "headers": {
                                                 'Content-Type': 'application/json',
-                                                'Authorization': 'key=AIzaSyBr6_kLRRLByjUJPE1kH83fmGhN5uA0KjY'
+                                                'Authorization': 'key=AIzaSyB_KKx-XyABDm9G8FbByiI4WTDpnuGPGgg'
                                             },
                                             "body": JSON.stringify(
                                                 {
